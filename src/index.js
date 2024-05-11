@@ -1,10 +1,11 @@
 const express=require("express");
 
+const {PORT}=require("./config/serverEnv.js")
+
 
 const automobileBackendService=()=>{
-       
-      const PORT=3000;
-      const app=express();
+     
+    const app=express();
 
       app.listen(PORT,()=>{
           console.log("Server is started on port",PORT)
