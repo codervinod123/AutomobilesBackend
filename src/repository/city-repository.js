@@ -1,57 +1,58 @@
-const {City}=require('../models/index');
+const { where } = require("sequelize");
+const {City}=require("../models/index");
 
-class cityRepository{
-   
+class CityRepository{
+    
     async createCity({name}){
         try {
-            const city=await City.create({
-                name:name
-            });
+            const city=await City.create({name:name});
             return city;
         } catch (error) {
-            console.log("Somewhere error has occured");
-            throw {error}; 
+            console.log("error has occured",error);
         }
     }
 
-    async getCity(cityId) {
-        try {
-            const city=await City.findByPk(cityId);
-            return city; 
-        } catch (error) {
-            console.log("Error Has occured", error);
-            throw {error};
-        }
-    }
-
-    async updateCity(cityId,newName){
-        try {
-             const city=await City.update(newName,{
-                where:{
-                    id:cityId
-                }
-             })
-             return city
-        } catch (error) {
-            console.log("Somewhere error has occured");
-            throw {error} 
-        }
-    }
 
     async deleteCity(cityId){
         try {
-            await City.destroy({
+            const city=await City.destroy({
                 where:{
                     id:cityId
                 }
             });
-            return true;
+            return city;
         } catch (error) {
-            console.log("Somewhere error has occured");
-            throw {error} 
+            console.log("error has occured",error);
         }
     }
 
-}
+    async getCity(cityId){
+        try {
+            const city=await City.findByPk({
+                where:{
+                    id:cityId
+                }
+            });
+            return city;
+        } catch (error) {
+            console.log("error has occured",error);
+        }
+    }
 
-module.exports=cityRepository;
+    
+    async updateCity(cityId,data){
+        try {
+            const city=await City.update(data,{
+                where:{
+                    id:cityId
+                }
+            });
+            return city;
+        } catch (error) {
+            console.log("error has occured",error);
+        }
+    }
+
+};
+
+module.exports=CityRepository;
