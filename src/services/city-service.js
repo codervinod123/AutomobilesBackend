@@ -1,4 +1,4 @@
-const CityRepository=require("../repository/city-repository");
+const CityRepository=require("../repository/index");
 
 class CityService{
    
@@ -11,7 +11,7 @@ class CityService{
               const city=await this.cityRepository.createCity(data);
               return city;
            } catch (error) {
-              console.log("Error Has occured from create city Service");
+              console.log("Error Has occured while creating city from Service");
               throw {error};
            }
     }
@@ -21,31 +21,41 @@ class CityService{
            const city=await this.cityRepository.deleteCity(id);
            return city;
         } catch (error) {
-           console.log("Error Has occured from create city Service");
+           console.log("Error Has occured while deleting city from service");
            throw {error};
         }
-   }
+    }
 
 
-   async getCity(id){
+    async getCity(id){
     try {
        const city=await this.cityRepository.getCity(id);
        return city;
     } catch (error) {
-       console.log("Error Has occured from create city Service");
+       console.log("Error Has occured whilet getting ones city from Service");
        throw {error};
     }
-}
+    }
 
-async updateCity(id,data){
+    async updateCity(id,data){
     try {
        const city=await this.cityRepository.updateCity(id,data);
        return city;
     } catch (error) {
-       console.log("Error Has occured from create city Service");
+       console.log("Error Has occured while updating city from Service");
        throw {error};
     }
-}
+    }
+
+   async getAll(){
+      try {
+         const city=await this.cityRepository.getAll();
+         return city;
+      } catch (error) {
+         console.log("Error Has occured gatt all city from Service");
+         throw {error};
+      }
+   }
 
 
    

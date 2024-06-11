@@ -1,4 +1,4 @@
-const CityService=require("../services/city-service");
+const CityService=require("../services/index");
 
 
 const CityController=new CityService();
@@ -9,7 +9,7 @@ const create=async(req,res)=>{
           return res.status(201).json({
               data:city,
               success:true,
-              message:"City has been added successfully",
+              message:"City has been added successfully!2345678",
               error:{}
           })
       } catch (error) {
@@ -21,7 +21,6 @@ const create=async(req,res)=>{
         })
       }
 }
-
 
 const destroy=async(req,res)=>{
     try {
@@ -42,14 +41,13 @@ const destroy=async(req,res)=>{
     }
 }
 
-
 const readcity=async(req,res)=>{
     try {
         const city=await CityController.getCity(req.params.id);
         return res.status(201).json({
             data:city,
             success:true,
-            message:"City has been fetched successfully",
+            message:"one City has been fetched successfully",
             error:{}
         })
     } catch (error) {
@@ -82,9 +80,31 @@ const update=async(req,res)=>{
 }
 
 
+const getall=async(req,res)=>{
+    try {
+        const city=await CityController.getAll();
+        // console.log();
+        return res.status(201).json({
+            data:city,
+            success:true,
+            message:"All City has fetched successfully Reso from Controller",
+            error:{}
+        })
+    } catch (error) {
+      return res.status(500).json({
+          data:null,
+          success:false,
+          message:"All City Can't be fetched from the TABLE",
+          error:error
+      })
+    }
+}
+
+
 module.exports={
     create,
     destroy,
     readcity,
-    update
+    update,
+    getall
 }

@@ -1,4 +1,3 @@
-const { where } = require("sequelize");
 const {City}=require("../models/index");
 
 class CityRepository{
@@ -8,7 +7,8 @@ class CityRepository{
             const city=await City.create({name:name});
             return city;
         } catch (error) {
-            console.log("error has occured",error);
+            console.log("error has occured on repository Layer",error);
+            return false;
         }
     }
 
@@ -22,9 +22,11 @@ class CityRepository{
             });
             return city;
         } catch (error) {
-            console.log("error has occured",error);
+            console.log("error has occured on repository Layer",error);
+            return false;
         }
     }
+
 
     async getCity(cityId){
         try {
@@ -35,7 +37,8 @@ class CityRepository{
             });
             return city;
         } catch (error) {
-            console.log("error has occured",error);
+            console.log("error has occured on repository Layer",error);
+            return false;
         }
     }
 
@@ -49,7 +52,18 @@ class CityRepository{
             });
             return city;
         } catch (error) {
-            console.log("error has occured",error);
+            console.log("error has occured on repository Layer",error);
+            return false;
+        }
+    }
+
+    async getAll(){
+        try {
+            const city=await City.findAll();
+            return city;
+        } catch (error) {
+            console.log("error has occured on repository Layer",error);
+            return false;
         }
     }
 
