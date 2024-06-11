@@ -57,6 +57,16 @@ class CityService{
       }
    }
 
+   async filterCity(text){
+      try {
+         const filterCities=await this.cityRepository.filterCity(text);
+         return filterCities;
+      } catch (error) {
+         console.log("Error Has occured while filtering city from Service");
+         throw {error};
+      }
+   }
+
 
    
 }

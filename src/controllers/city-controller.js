@@ -101,10 +101,31 @@ const getall=async(req,res)=>{
 }
 
 
+const filtercity=async(req,res)=>{
+  try {
+      const filtercities=await CityController.filterCity(req.params.text);
+      return res.status(200).json({
+        data:filtercities,
+        success:true,
+        message:"City has filtered successfully",
+        error:{}
+      })
+  } catch (error) {
+    return res.status(200).json({
+        data:{},
+        success:false,
+        message:"City has not filtered successfully",
+        error:{}
+      })
+  }
+} 
+
+
 module.exports={
     create,
     destroy,
     readcity,
     update,
-    getall
+    getall,
+    filtercity
 }

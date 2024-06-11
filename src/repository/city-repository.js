@@ -1,4 +1,5 @@
 const {City}=require("../models/index");
+const { Op } =require("sequelize");
 
 class CityRepository{
     
@@ -61,6 +62,22 @@ class CityRepository{
         try {
             const city=await City.findAll();
             return city;
+        } catch (error) {
+            console.log("error has occured on repository Layer",error);
+            return false;
+        }
+    }
+
+    async filterCity(text){
+        try {
+            const filterCities=await City.findAll({
+                where:{
+                    name:{
+                        [Op.like]: `${text}%`
+                    }
+                }
+            });
+            return filterCities;
         } catch (error) {
             console.log("error has occured on repository Layer",error);
             return false;
